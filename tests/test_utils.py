@@ -1,5 +1,6 @@
 import json
 from unittest.mock import mock_open, patch
+
 from src.utils import load_operations
 
 
@@ -16,6 +17,7 @@ def test_load_operations_success():
 def test_load_operations_file_not_found():
     with patch("builtins.open", side_effect=FileNotFoundError):
         result = load_operations("non_existent.json")
+
     assert result == []
 
 
@@ -24,6 +26,7 @@ def test_load_operations_invalid_json():
 
     with patch("builtins.open", mock_file):
         result = load_operations("any_path.json")
+
     assert result == []
 
 
@@ -33,4 +36,5 @@ def test_load_operations_not_a_list():
 
     with patch("builtins.open", mock_file):
         result = load_operations("any_path.json")
+
     assert result == []
